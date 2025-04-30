@@ -10,6 +10,10 @@ class Directory < ApplicationRecord
            dependent: :destroy,
            inverse_of: :parent_directory
 
+  has_many :documents,
+           dependent: :destroy,
+           inverse_of: :directory
+
   validates :name, presence: true
 
   def path

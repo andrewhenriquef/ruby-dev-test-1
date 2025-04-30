@@ -5,6 +5,7 @@ RSpec.describe Directory, type: :model do
     it do
       is_expected.to belong_to(:parent_directory)
         .class_name('Directory')
+        .with_foreign_key(:parent_id)
         .optional
     end
 
@@ -14,6 +15,12 @@ RSpec.describe Directory, type: :model do
         .with_foreign_key(:parent_id)
         .dependent(:destroy)
         .inverse_of(:parent_directory)
+    end
+
+    it do
+      is_expected.to have_many(:documents)
+        .dependent(:destroy)
+        .inverse_of(:directory)
     end
   end
 

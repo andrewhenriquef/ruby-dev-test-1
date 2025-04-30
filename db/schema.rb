@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_29_232024) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_30_010728) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,7 +50,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_29_232024) do
     t.index ["parent_id"], name: "index_directories_on_parent_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.bigint "directory_id", null: false
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["directory_id"], name: "index_documents_on_directory_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "directories", "directories", column: "parent_id"
+  add_foreign_key "documents", "directories"
 end
