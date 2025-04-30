@@ -42,6 +42,9 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Allow requests to the test host
+  config.hosts << /.*\.example\.com/
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
